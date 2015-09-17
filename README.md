@@ -1,2 +1,13 @@
 # simple_rpc
 High concurrency rpc simulation
+
+
+在网上看到一个最简单rcp的例子，实际的模型就是一个socket通信，
+server端提供服务
+client端使用动态代理，在方法调用里维护一个到server端的socket连接，发送方法名、参数给server。server端采用反射调用服务方法。从而实现一个最简单的rpc调用。
+
+我在这个最简单的版本的基础上做了优化，主要包括两点
+1.使用netty取代普通的socket同步阻塞IO，使用异步IO来提高性能
+2.使用protobuf取代jdk自带的序列化反序列化，提高性能
+
+另外还可以引入zookeeper来进行服务的注册，在这里还没有加入。后续可以加入。
